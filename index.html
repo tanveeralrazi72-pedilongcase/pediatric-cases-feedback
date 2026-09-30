@@ -4,38 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Reader Feedback & Error Reporting | The Art of Pediatric Long Cases</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Times New Roman', Times, serif !important;
+    }
+
     :root {
       --primary: #1E3A8A;
       --primary-hover: #172554;
       --bg: #F8FAFC;
       --surface: #FFFFFF;
       --border: #CBD5E1;
-      --border-focus: #2563EB;
+      --border-focus: #1E3A8A;
       --text-main: #0F172A;
       --text-muted: #475569;
       --error: #DC2626;
-      --success: #15803D;
-      --font-serif: 'Merriweather', Georgia, serif;
-      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --radius: 8px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+      --radius: 6px;
     }
 
     body {
       background-color: var(--bg);
       color: var(--text-main);
-      font-family: var(--font-sans);
-      font-size: 15px;
+      font-size: 16px;
       line-height: 1.6;
       padding: 16px 12px;
       -webkit-font-smoothing: antialiased;
@@ -49,35 +43,24 @@
     /* Academic Header */
     header {
       text-align: center;
-      padding: 24px 12px 28px;
+      padding: 20px 10px 24px;
       border-bottom: 2px solid var(--border);
       margin-bottom: 24px;
     }
 
+    /* Single line, same font, same color */
     .book-title {
-      font-family: var(--font-serif);
-      font-size: 1.35rem;
-      font-weight: 700;
+      font-size: 1.45rem;
+      font-weight: bold;
       color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
       line-height: 1.3;
-      margin-bottom: 4px;
-    }
-
-    .book-subtitle {
-      font-family: var(--font-serif);
-      font-size: 1.05rem;
-      font-style: italic;
-      color: var(--text-muted);
       margin-bottom: 8px;
     }
 
     .book-author {
-      font-size: 0.95rem;
-      font-weight: 600;
+      font-size: 1.1rem;
       color: var(--text-main);
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .purpose-badge {
@@ -87,13 +70,13 @@
       border: 1px solid #BFDBFE;
       padding: 4px 14px;
       border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
+      font-size: 0.95rem;
+      font-weight: bold;
       margin-bottom: 12px;
     }
 
     .header-desc {
-      font-size: 0.92rem;
+      font-size: 0.98rem;
       color: var(--text-muted);
       max-width: 580px;
       margin: 0 auto;
@@ -106,32 +89,29 @@
       color: var(--text-main);
     }
 
-    /* Main Card */
+    /* Form Card */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-      padding: 24px 20px;
+      padding: 24px 18px;
       margin-bottom: 24px;
     }
 
     .section-title {
-      font-size: 1.05rem;
-      font-weight: 700;
+      font-size: 1.15rem;
+      font-weight: bold;
       color: var(--primary);
       border-bottom: 1px solid #E2E8F0;
-      padding-bottom: 8px;
+      padding-bottom: 6px;
       margin: 24px 0 16px;
-      display: flex;
-      align-items: center;
     }
 
     .section-title:first-of-type {
       margin-top: 0;
     }
 
-    /* Form Fields */
     .form-group {
       margin-bottom: 16px;
     }
@@ -156,22 +136,16 @@
         padding: 32px 28px;
       }
       .book-title {
-        font-size: 1.6rem;
+        font-size: 1.65rem;
       }
     }
 
     label {
       display: block;
-      font-weight: 600;
-      font-size: 0.9rem;
+      font-weight: bold;
+      font-size: 0.98rem;
       margin-bottom: 6px;
       color: var(--text-main);
-    }
-
-    .label-optional {
-      font-weight: 400;
-      color: var(--text-muted);
-      font-size: 0.8rem;
     }
 
     .req {
@@ -189,11 +163,10 @@
       padding: 10px 12px;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      font-family: inherit;
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: var(--text-main);
       background-color: #FAFAFA;
-      transition: border-color 0.15s, background-color 0.15s, box-shadow 0.15s;
+      transition: border-color 0.15s, background-color 0.15s;
     }
 
     input:focus,
@@ -202,7 +175,7 @@
       outline: none;
       border-color: var(--border-focus);
       background-color: #FFFFFF;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+      box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.15);
     }
 
     textarea {
@@ -210,14 +183,7 @@
       min-height: 90px;
     }
 
-    .helper-text {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-      line-height: 1.4;
-    }
-
-    /* Feedback Type Cards */
+    /* Feedback Category Grid */
     .radio-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -231,21 +197,20 @@
     }
 
     .radio-card {
-      position: relative;
       display: flex;
       align-items: center;
-      padding: 10px 14px;
+      padding: 10px 12px;
       border: 1px solid var(--border);
       border-radius: var(--radius);
       cursor: pointer;
       background: #FFFFFF;
       user-select: none;
       transition: all 0.15s ease;
+      font-size: 0.95rem;
     }
 
     .radio-card:hover {
       background: #F1F5F9;
-      border-color: #94A3B8;
     }
 
     .radio-card input[type="radio"] {
@@ -258,10 +223,10 @@
     .radio-card.active {
       border-color: var(--primary);
       background-color: #EFF6FF;
-      font-weight: 500;
+      font-weight: bold;
     }
 
-    /* Conditional fields */
+    /* Comparison fields */
     #conditionalFields {
       display: none;
       background: #F8FAFC;
@@ -271,7 +236,7 @@
       margin: 16px 0;
     }
 
-    /* File Attachment Box */
+    /* Optional photo box */
     .file-input-wrapper {
       border: 1px dashed var(--border);
       border-radius: var(--radius);
@@ -280,10 +245,6 @@
       background: #F8FAFC;
       position: relative;
       cursor: pointer;
-    }
-
-    .file-input-wrapper:hover {
-      border-color: var(--primary);
     }
 
     .file-input-wrapper input[type="file"] {
@@ -298,13 +259,52 @@
 
     .file-name-preview {
       margin-top: 8px;
-      font-weight: 600;
-      font-size: 0.85rem;
+      font-weight: bold;
+      font-size: 0.9rem;
       color: var(--primary);
       word-break: break-all;
     }
 
-    /* Yes/No Radio Toggle */
+    /* Star Rating (1 to 10 Stars) */
+    .star-rating-container {
+      background: #F8FAFC;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .stars-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      flex-wrap: wrap;
+      margin: 12px 0 8px;
+    }
+
+    .star-btn {
+      font-size: 1.8rem;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.1s, filter 0.1s;
+      filter: grayscale(100%) opacity(30%);
+      line-height: 1;
+    }
+
+    .star-btn.selected,
+    .star-btn.hovered {
+      filter: grayscale(0%) opacity(100%);
+    }
+
+    .rating-label-display {
+      font-weight: bold;
+      font-size: 1rem;
+      color: var(--primary);
+      min-height: 24px;
+    }
+
+    /* Contact toggle */
     .radio-inline {
       display: flex;
       gap: 18px;
@@ -315,7 +315,7 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      font-weight: 500;
+      font-weight: normal;
       cursor: pointer;
     }
 
@@ -324,8 +324,8 @@
       width: 100%;
       background-color: var(--primary);
       color: #FFFFFF;
-      font-size: 1.05rem;
-      font-weight: 600;
+      font-size: 1.1rem;
+      font-weight: bold;
       padding: 14px;
       border: none;
       border-radius: var(--radius);
@@ -335,22 +335,15 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 2px 4px rgba(30, 58, 138, 0.2);
-      transition: background 0.15s, transform 0.05s;
     }
 
     .btn-submit:hover {
       background-color: var(--primary-hover);
     }
 
-    .btn-submit:active {
-      transform: scale(0.99);
-    }
-
     .btn-submit:disabled {
       background-color: #94A3B8;
       cursor: not-allowed;
-      box-shadow: none;
     }
 
     .spinner {
@@ -367,43 +360,38 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Success / Result View */
+    /* Success Screen */
     #successView {
       display: none;
       text-align: center;
-      padding: 40px 20px;
+      padding: 40px 16px;
     }
 
-    .success-icon {
-      width: 56px;
-      height: 56px;
-      background: #DCFCE7;
-      color: var(--success);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      font-size: 28px;
+    .thank-you-headline {
+      font-size: 1.5rem;
       font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 12px;
+      line-height: 1.4;
     }
 
-    .success-title {
-      font-family: var(--font-serif);
-      font-size: 1.4rem;
+    .thank-you-prayer {
+      font-size: 1.25rem;
+      font-style: italic;
       color: var(--text-main);
-      margin-bottom: 8px;
+      margin-bottom: 24px;
+      line-height: 1.5;
     }
 
     .feedback-ref {
-      font-family: monospace;
+      font-family: monospace !important;
       font-size: 0.95rem;
       background: #F1F5F9;
       padding: 4px 10px;
       border-radius: 4px;
       color: var(--primary);
       display: inline-block;
-      margin: 10px 0 16px;
+      margin-bottom: 24px;
     }
 
     .btn-secondary {
@@ -412,20 +400,9 @@
       border: 1px solid var(--primary);
       padding: 10px 20px;
       border-radius: var(--radius);
-      font-weight: 600;
-      font-size: 0.9rem;
+      font-weight: bold;
+      font-size: 0.95rem;
       cursor: pointer;
-      margin-top: 16px;
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 24px 12px;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      border-top: 1px solid var(--border);
-      line-height: 1.6;
     }
 
     .error-banner {
@@ -436,7 +413,14 @@
       padding: 12px;
       border-radius: var(--radius);
       margin-bottom: 16px;
-      font-size: 0.9rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px 12px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
     }
   </style>
 </head>
@@ -444,8 +428,8 @@
 
   <div class="container">
     <header>
-      <h1 class="book-title">The Art of Pediatric Long Cases</h1>
-      <p class="book-subtitle">A Clinical Approach</p>
+      <!-- Single line, same font, same color -->
+      <h1 class="book-title">The Art of Pediatric Long Cases: A Clinical Approach</h1>
       <p class="book-author">Tanveer Al Razi Khan</p>
       <div class="purpose-badge">Reader Feedback &amp; Error Reporting</div>
       <p class="header-desc">
@@ -459,39 +443,40 @@
 
       <!-- SUCCESS SCREEN -->
       <div id="successView">
-        <div class="success-icon">✓</div>
-        <h2 class="success-title">Thank you for your feedback.</h2>
-        <p>Your feedback has been received successfully.</p>
+        <h2 class="thank-you-headline">Thank you so much for your response!</h2>
+        <p class="thank-you-prayer">Please keep us in your prayers.</p>
         <p>Reference ID: <span id="displayFeedbackId" class="feedback-ref"></span></p>
-        <p class="header-desc" style="margin-top: 10px;">Your suggestions and corrections will help improve future editions of the book.</p>
-        <button type="button" class="btn-secondary" id="resetBtn">Submit Another Feedback</button>
+        <div>
+          <button type="button" class="btn-secondary" id="resetBtn">Submit Another Feedback</button>
+        </div>
       </div>
 
       <!-- MAIN FORM -->
       <form id="feedbackForm" novalidate>
         
-        <!-- SECTION 1: Reader Information -->
+        <!-- SECTION 1: Reader Information (ALL MANDATORY) -->
         <h2 class="section-title">Reader Information</h2>
         
         <div class="row">
           <div class="form-group">
             <label for="readerName">Name <span class="req">*</span></label>
-            <input type="text" id="readerName" name="readerName" required placeholder="Dr. / Student full name">
+            <input type="text" id="readerName" name="readerName" required placeholder="Your full name">
           </div>
           <div class="form-group">
-            <label for="whatsappNumber">WhatsApp Number <span class="label-optional">(Optional)</span></label>
-            <input type="tel" id="whatsappNumber" name="whatsappNumber" placeholder="+880 1XXX-XXXXXX">
+            <label for="whatsappNumber">WhatsApp Number <span class="req">*</span></label>
+            <input type="tel" id="whatsappNumber" name="whatsappNumber" required placeholder="+880 1XXX-XXXXXX">
           </div>
         </div>
 
         <div class="row">
           <div class="form-group">
-            <label for="readerEmail">Email <span id="emailRequiredBadge" class="label-optional">(Optional)</span></label>
-            <input type="email" id="readerEmail" name="readerEmail" placeholder="reader@example.com">
+            <label for="readerEmail">Email <span class="req">*</span></label>
+            <input type="email" id="readerEmail" name="readerEmail" required placeholder="reader@example.com">
           </div>
           <div class="form-group">
-            <label for="readerType">Reader Type</label>
-            <select id="readerType" name="readerType">
+            <label for="readerType">Reader Type <span class="req">*</span></label>
+            <select id="readerType" name="readerType" required>
+              <option value="" disabled selected>Select reader type</option>
               <option value="Student">Student</option>
               <option value="Doctor">Doctor</option>
               <option value="Teacher">Teacher</option>
@@ -500,27 +485,27 @@
         </div>
 
         <div class="form-group">
-          <label for="institution">Institution / Medical College <span class="label-optional">(Optional)</span></label>
-          <input type="text" id="institution" name="institution" placeholder="e.g. Dhaka Medical College">
+          <label for="institution">Institution / Medical College <span class="req">*</span></label>
+          <input type="text" id="institution" name="institution" required placeholder="e.g. Dhaka Medical College">
         </div>
 
-        <!-- SECTION 2: Book Location -->
+        <!-- SECTION 2: Where did you find the issue? (ALL MANDATORY) -->
         <h2 class="section-title">Where did you find the issue?</h2>
 
         <div class="row">
           <div class="form-group">
             <label for="sectionTopic">Section / Topic Name <span class="req">*</span></label>
-            <input type="text" id="sectionTopic" name="sectionTopic" required placeholder="e.g. General Examination, Nephrotic Syndrome">
+            <input type="text" id="sectionTopic" name="sectionTopic" required placeholder="e.g. Nephrotic Syndrome, Cyanotic Heart Disease">
           </div>
           <div class="form-group" style="max-width: 140px;">
             <label for="pageNumber">Page Number <span class="req">*</span></label>
-            <input type="number" id="pageNumber" name="pageNumber" required min="1" max="2000" placeholder="e.g. 158">
+            <input type="number" id="pageNumber" name="pageNumber" required min="1" max="2500" placeholder="e.g. 158">
           </div>
         </div>
 
         <div class="form-group">
-          <label for="caseSubtopic">Case / Subtopic <span class="label-optional">(Optional)</span></label>
-          <input type="text" id="caseSubtopic" name="caseSubtopic" placeholder="e.g. Investigation section, Clinical pearl, Differential diagnosis">
+          <label for="caseSubtopic">Case / Subtopic <span class="req">*</span></label>
+          <input type="text" id="caseSubtopic" name="caseSubtopic" required placeholder="e.g. Investigation section, Clinical Pearl, History">
         </div>
 
         <!-- SECTION 3: Type of Feedback -->
@@ -560,34 +545,30 @@
             Suggestion for Improvement
           </label>
           <label class="radio-card">
+            <input type="radio" name="feedbackType" value="Overall Review">
+            Overall Review
+          </label>
+          <label class="radio-card">
             <input type="radio" name="feedbackType" value="Other">
             Other
           </label>
         </div>
 
-        <!-- CONDITIONAL FIELDS -->
+        <!-- CONDITIONAL COMPARISON FIELDS (MANDATORY WHEN SHOWN) -->
         <div id="conditionalFields">
           <div class="form-group">
-            <label for="currentStatement">What is currently written?</label>
+            <label for="currentStatement">What is currently written? <span class="req">*</span></label>
             <textarea id="currentStatement" name="currentStatement" placeholder="Quote or describe what is currently printed in the book..."></textarea>
           </div>
           <div class="form-group" style="margin-bottom: 0;">
-            <label for="suggestedCorrection">What do you think it should be?</label>
-            <textarea id="suggestedCorrection" name="suggestedCorrection" placeholder="State your suggested correction or correct phrasing..."></textarea>
+            <label for="suggestedCorrection">What do you think it should be? <span class="req">*</span></label>
+            <textarea id="suggestedCorrection" name="suggestedCorrection" placeholder="State your suggested correction or accurate phrasing..."></textarea>
           </div>
         </div>
 
-        <!-- SECTION 4: Your Feedback -->
-        <h2 class="section-title">Your Feedback</h2>
-
-        <div class="form-group">
-          <label for="feedbackText">Detailed Feedback <span class="req">*</span></label>
-          <textarea id="feedbackText" name="feedbackText" required placeholder="Please describe the error, inconsistency, or suggestion as clearly as possible. (e.g., Page 158, under the investigation section, the statement regarding ______ may need correction because ______.)"></textarea>
-        </div>
-
-        <!-- SECTION 5: Optional Screenshot -->
-        <div class="form-group">
-          <label>Optional Photograph / Screenshot <span class="label-optional">(Max 10 MB: JPG, PNG, PDF)</span></label>
+        <!-- SEGMENT: Optional Photograph -->
+        <div class="form-group" style="margin-top: 18px;">
+          <label>Optional Photograph / Screenshot <span style="font-weight: normal; color: var(--text-muted);">(Max 10 MB)</span></label>
           <div class="file-input-wrapper">
             <span>📷 Click or tap to attach a photo of the book page</span>
             <input type="file" id="pageAttachment" accept=".jpg, .jpeg, .png, .pdf">
@@ -595,14 +576,33 @@
           </div>
         </div>
 
+        <!-- SECTION 4: Your Feedback -->
+        <h2 class="section-title">Overall Review</h2>
+
+        <div class="form-group">
+          <label for="overallReview">Overall Review <span class="req">*</span></label>
+          <textarea id="overallReview" name="overallReview" required placeholder="Please write your review, detailed feedback, or explanation here..."></textarea>
+        </div>
+
+        <!-- SECTION 5: Book Rating (1 to 10 Stars) -->
+        <h2 class="section-title">How would you rate this book? <span class="req">*</span></h2>
+        
+        <div class="star-rating-container">
+          <p style="font-size: 0.95rem; color: var(--text-muted);">Select from 1 to 10 stars:</p>
+          <div class="stars-wrapper" id="starsWrapper">
+            <!-- 10 Stars generated by JS -->
+          </div>
+          <div class="rating-label-display" id="ratingDisplay">Tap a star to rate</div>
+          <input type="hidden" id="bookRating" name="bookRating" required value="">
+        </div>
+
         <!-- SECTION 6: Contact Preference -->
-        <div class="form-group" style="margin-top: 20px;">
+        <div class="form-group">
           <label>Would you like the author to contact you regarding this feedback?</label>
           <div class="radio-inline">
             <label><input type="radio" name="contactRequested" value="No" checked> No</label>
             <label><input type="radio" name="contactRequested" value="Yes"> Yes</label>
           </div>
-          <p class="helper-text" id="contactNote">If Yes, an email address is required so the author can reach you.</p>
         </div>
 
         <!-- SUBMIT BUTTON -->
@@ -624,7 +624,7 @@
 
   <script>
     // -------------------------------------------------------------------------
-    // CONFIGURATION: Paste your deployed Google Apps Script Web App URL below:
+    // PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE:
     // -------------------------------------------------------------------------
     const GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbzMI80Dh6eNF2Th_jUQmiGd9bp012cdFpR5wJBUHAKKRYkZmYhT619RRfNWTAI3HFBiHA/exec";
 
@@ -636,11 +636,14 @@
     const resetBtn = document.getElementById('resetBtn');
     const errorBanner = document.getElementById('errorBanner');
     const conditionalFields = document.getElementById('conditionalFields');
+    const currentStatement = document.getElementById('currentStatement');
+    const suggestedCorrection = document.getElementById('suggestedCorrection');
     const fileInput = document.getElementById('pageAttachment');
     const fileNameDisplay = document.getElementById('fileNameDisplay');
-    const emailInput = document.getElementById('readerEmail');
-    const emailRequiredBadge = document.getElementById('emailRequiredBadge');
     const feedbackTypeCards = document.querySelectorAll('.radio-card');
+    const starsWrapper = document.getElementById('starsWrapper');
+    const ratingDisplay = document.getElementById('ratingDisplay');
+    const bookRatingInput = document.getElementById('bookRating');
 
     const COMPARISON_TYPES = [
       "Clinical / Factual Error",
@@ -650,11 +653,61 @@
     ];
 
     let filePayload = null;
+    let selectedRating = 0;
 
-    // Toggle conditional error comparison textareas
+    // Build 1 to 10 Interactive Stars
+    for (let i = 1; i <= 10; i++) {
+      const star = document.createElement('span');
+      star.className = 'star-btn';
+      star.textContent = '⭐';
+      star.dataset.val = i;
+
+      star.addEventListener('mouseenter', () => highlightStars(i));
+      star.addEventListener('click', () => {
+        selectedRating = i;
+        bookRatingInput.value = i;
+        renderSelectedStars(i);
+        ratingDisplay.textContent = `${i} / 10 Stars`;
+      });
+
+      starsWrapper.appendChild(star);
+    }
+
+    starsWrapper.addEventListener('mouseleave', () => {
+      renderSelectedStars(selectedRating);
+    });
+
+    function highlightStars(count) {
+      const stars = starsWrapper.querySelectorAll('.star-btn');
+      stars.forEach((s, idx) => {
+        s.classList.toggle('hovered', idx < count);
+      });
+    }
+
+    function renderSelectedStars(count) {
+      const stars = starsWrapper.querySelectorAll('.star-btn');
+      stars.forEach((s, idx) => {
+        s.classList.remove('hovered');
+        s.classList.toggle('selected', idx < count);
+      });
+    }
+
+    // Toggle conditional error comparison textareas & enforce required
     function updateConditionalFields() {
       const selectedType = document.querySelector('input[name="feedbackType"]:checked').value;
-      conditionalFields.style.display = COMPARISON_TYPES.includes(selectedType) ? 'block' : 'none';
+      const isComparison = COMPARISON_TYPES.includes(selectedType);
+
+      if (isComparison) {
+        conditionalFields.style.display = 'block';
+        currentStatement.required = true;
+        suggestedCorrection.required = true;
+      } else {
+        conditionalFields.style.display = 'none';
+        currentStatement.required = false;
+        suggestedCorrection.required = false;
+        currentStatement.value = '';
+        suggestedCorrection.value = '';
+      }
     }
 
     feedbackTypeCards.forEach(card => {
@@ -668,23 +721,6 @@
     });
 
     updateConditionalFields();
-
-    // Dynamically require email if contact is requested
-    const contactRadios = document.querySelectorAll('input[name="contactRequested"]');
-    contactRadios.forEach(radio => {
-      radio.addEventListener('change', (e) => {
-        if (e.target.value === 'Yes') {
-          emailInput.required = true;
-          emailRequiredBadge.textContent = "(Required)";
-          emailRequiredBadge.className = "req";
-          emailInput.focus();
-        } else {
-          emailInput.required = false;
-          emailRequiredBadge.textContent = "(Optional)";
-          emailRequiredBadge.className = "label-optional";
-        }
-      });
-    });
 
     // File processing into Base64 (max 10 MB)
     fileInput.addEventListener('change', (e) => {
@@ -743,6 +779,12 @@
         return;
       }
 
+      if (!bookRatingInput.value) {
+        showError("Please rate the book from 1 to 10 stars before submitting.");
+        starsWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
       const payload = {
         name: document.getElementById('readerName').value.trim(),
         whatsapp: document.getElementById('whatsappNumber').value.trim(),
@@ -753,9 +795,10 @@
         pageNumber: document.getElementById('pageNumber').value.trim(),
         caseSubtopic: document.getElementById('caseSubtopic').value.trim(),
         feedbackType: document.querySelector('input[name="feedbackType"]:checked').value,
-        currentStatement: document.getElementById('currentStatement').value.trim(),
-        suggestedCorrection: document.getElementById('suggestedCorrection').value.trim(),
-        feedback: document.getElementById('feedbackText').value.trim(),
+        currentStatement: currentStatement.value.trim(),
+        suggestedCorrection: suggestedCorrection.value.trim(),
+        overallReview: document.getElementById('overallReview').value.trim(),
+        rating: bookRatingInput.value,
         contactRequested: document.querySelector('input[name="contactRequested"]:checked').value,
         fileData: filePayload ? filePayload.fileData : null,
         fileName: filePayload ? filePayload.fileName : null,
@@ -799,6 +842,10 @@
     resetBtn.addEventListener('click', () => {
       form.reset();
       filePayload = null;
+      selectedRating = 0;
+      bookRatingInput.value = '';
+      renderSelectedStars(0);
+      ratingDisplay.textContent = 'Tap a star to rate';
       fileNameDisplay.textContent = '';
       updateConditionalFields();
       successView.style.display = 'none';
