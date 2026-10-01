@@ -40,7 +40,7 @@
       margin: 0 auto;
     }
 
-    /* Academic Header */
+    /* Header */
     header {
       text-align: center;
       padding: 20px 10px 24px;
@@ -48,7 +48,6 @@
       margin-bottom: 24px;
     }
 
-    /* Single line, same font, same color */
     .book-title {
       font-size: 1.45rem;
       font-weight: bold;
@@ -89,7 +88,7 @@
       color: var(--text-main);
     }
 
-    /* Form Card */
+    /* Card */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -183,7 +182,7 @@
       min-height: 90px;
     }
 
-    /* Feedback Category Grid */
+    /* Feedback Categories */
     .radio-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -226,17 +225,16 @@
       font-weight: bold;
     }
 
-    /* Comparison fields */
-    #conditionalFields {
-      display: none;
+    /* Comparison Box */
+    .comparison-container {
       background: #F8FAFC;
-      border: 1px dashed var(--border);
+      border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 16px;
       margin: 16px 0;
     }
 
-    /* Optional photo box */
+    /* Photo Upload */
     .file-input-wrapper {
       border: 1px dashed var(--border);
       border-radius: var(--radius);
@@ -265,7 +263,7 @@
       word-break: break-all;
     }
 
-    /* Star Rating (1 to 10 Stars) */
+    /* 1 to 10 Stars */
     .star-rating-container {
       background: #F8FAFC;
       border: 1px solid var(--border);
@@ -304,7 +302,6 @@
       min-height: 24px;
     }
 
-    /* Contact toggle */
     .radio-inline {
       display: flex;
       gap: 18px;
@@ -319,7 +316,6 @@
       cursor: pointer;
     }
 
-    /* Submit Button */
     .btn-submit {
       width: 100%;
       background-color: var(--primary);
@@ -428,7 +424,6 @@
 
   <div class="container">
     <header>
-      <!-- Single line, same font, same color -->
       <h1 class="book-title">The Art of Pediatric Long Cases: A Clinical Approach</h1>
       <p class="book-author">Tanveer Al Razi Khan</p>
       <div class="purpose-badge">Reader Feedback &amp; Error Reporting</div>
@@ -508,7 +503,7 @@
           <input type="text" id="caseSubtopic" name="caseSubtopic" required placeholder="e.g. Investigation section, Clinical Pearl, History">
         </div>
 
-        <!-- SECTION 3: Type of Feedback -->
+        <!-- SECTION 3: Type of Feedback (Overall Review Removed) -->
         <h2 class="section-title">Type of Feedback</h2>
 
         <div class="radio-grid" id="feedbackTypeContainer">
@@ -545,28 +540,24 @@
             Suggestion for Improvement
           </label>
           <label class="radio-card">
-            <input type="radio" name="feedbackType" value="Overall Review">
-            Overall Review
-          </label>
-          <label class="radio-card">
             <input type="radio" name="feedbackType" value="Other">
             Other
           </label>
         </div>
 
-        <!-- CONDITIONAL COMPARISON FIELDS (MANDATORY WHEN SHOWN) -->
-        <div id="conditionalFields">
+        <!-- ALWAYS VISIBLE & MANDATORY QUESTIONS -->
+        <div class="comparison-container">
           <div class="form-group">
             <label for="currentStatement">What is currently written? <span class="req">*</span></label>
-            <textarea id="currentStatement" name="currentStatement" placeholder="Quote or describe what is currently printed in the book..."></textarea>
+            <textarea id="currentStatement" name="currentStatement" required placeholder="Quote or describe what is currently printed in the book..."></textarea>
           </div>
           <div class="form-group" style="margin-bottom: 0;">
             <label for="suggestedCorrection">What do you think it should be? <span class="req">*</span></label>
-            <textarea id="suggestedCorrection" name="suggestedCorrection" placeholder="State your suggested correction or accurate phrasing..."></textarea>
+            <textarea id="suggestedCorrection" name="suggestedCorrection" required placeholder="State your suggested correction or accurate phrasing..."></textarea>
           </div>
         </div>
 
-        <!-- SEGMENT: Optional Photograph -->
+        <!-- OPTIONAL PHOTOGRAPH -->
         <div class="form-group" style="margin-top: 18px;">
           <label>Optional Photograph / Screenshot <span style="font-weight: normal; color: var(--text-muted);">(Max 10 MB)</span></label>
           <div class="file-input-wrapper">
@@ -576,8 +567,8 @@
           </div>
         </div>
 
-        <!-- SECTION 4: Your Feedback -->
-        <h2 class="section-title">Overall Review</h2>
+        <!-- SECTION 4: YOUR FEEDBACK -->
+        <h2 class="section-title">Your Feedback</h2>
 
         <div class="form-group">
           <label for="overallReview">Overall Review <span class="req">*</span></label>
@@ -589,9 +580,7 @@
         
         <div class="star-rating-container">
           <p style="font-size: 0.95rem; color: var(--text-muted);">Select from 1 to 10 stars:</p>
-          <div class="stars-wrapper" id="starsWrapper">
-            <!-- 10 Stars generated by JS -->
-          </div>
+          <div class="stars-wrapper" id="starsWrapper"></div>
           <div class="rating-label-display" id="ratingDisplay">Tap a star to rate</div>
           <input type="hidden" id="bookRating" name="bookRating" required value="">
         </div>
@@ -635,7 +624,6 @@
     const successView = document.getElementById('successView');
     const resetBtn = document.getElementById('resetBtn');
     const errorBanner = document.getElementById('errorBanner');
-    const conditionalFields = document.getElementById('conditionalFields');
     const currentStatement = document.getElementById('currentStatement');
     const suggestedCorrection = document.getElementById('suggestedCorrection');
     const fileInput = document.getElementById('pageAttachment');
@@ -644,13 +632,6 @@
     const starsWrapper = document.getElementById('starsWrapper');
     const ratingDisplay = document.getElementById('ratingDisplay');
     const bookRatingInput = document.getElementById('bookRating');
-
-    const COMPARISON_TYPES = [
-      "Clinical / Factual Error",
-      "Spelling / Grammar",
-      "Typographical Error",
-      "Reference / Citation Issue"
-    ];
 
     let filePayload = null;
     let selectedRating = 0;
@@ -692,35 +673,15 @@
       });
     }
 
-    // Toggle conditional error comparison textareas & enforce required
-    function updateConditionalFields() {
-      const selectedType = document.querySelector('input[name="feedbackType"]:checked').value;
-      const isComparison = COMPARISON_TYPES.includes(selectedType);
-
-      if (isComparison) {
-        conditionalFields.style.display = 'block';
-        currentStatement.required = true;
-        suggestedCorrection.required = true;
-      } else {
-        conditionalFields.style.display = 'none';
-        currentStatement.required = false;
-        suggestedCorrection.required = false;
-        currentStatement.value = '';
-        suggestedCorrection.value = '';
-      }
-    }
-
+    // Feedback type selection card styling
     feedbackTypeCards.forEach(card => {
       card.addEventListener('click', () => {
         feedbackTypeCards.forEach(c => c.classList.remove('active'));
         card.classList.add('active');
         const radio = card.querySelector('input[type="radio"]');
         radio.checked = true;
-        updateConditionalFields();
       });
     });
-
-    updateConditionalFields();
 
     // File processing into Base64 (max 10 MB)
     fileInput.addEventListener('change', (e) => {
@@ -847,7 +808,6 @@
       renderSelectedStars(0);
       ratingDisplay.textContent = 'Tap a star to rate';
       fileNameDisplay.textContent = '';
-      updateConditionalFields();
       successView.style.display = 'none';
       form.style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
